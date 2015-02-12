@@ -1,11 +1,13 @@
 package com.porterhead.user;
 
-import com.porterhead.persistence.BaseEntity;
-import org.joda.time.DateTime;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 import java.util.UUID;
+
+import javax.persistence.Entity;
+
+import org.joda.time.DateTime;
+
+import com.porterhead.persistence.BaseEntity;
 
 /**
  * A token that gives the user permission to carry out a specific task once within a determined time period.
@@ -16,7 +18,7 @@ import java.util.UUID;
  * @author: Iain Porter
  * @since 14/05/2013
  */
-@Document
+@Entity
 public class VerificationToken extends BaseEntity {
 
     private static final int DEFAULT_EXPIRY_TIME_IN_MINS = 60 * 24; //24 hours

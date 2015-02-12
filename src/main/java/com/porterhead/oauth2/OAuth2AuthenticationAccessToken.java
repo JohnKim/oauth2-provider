@@ -1,6 +1,9 @@
 package com.porterhead.oauth2;
 
+import javax.persistence.Entity;
+
 import com.porterhead.persistence.BaseEntity;
+
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
@@ -9,6 +12,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
  * @author: Iain Porter
  * @since 22/05/2013
  */
+@Entity
 public class OAuth2AuthenticationAccessToken extends BaseEntity {
 
     private String tokenId;

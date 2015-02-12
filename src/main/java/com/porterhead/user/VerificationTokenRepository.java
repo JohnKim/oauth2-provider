@@ -1,15 +1,15 @@
 package com.porterhead.user;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @version 1.0
  * @author: Iain Porter
  * @since 13/05/2013
  */
-public interface VerificationTokenRepository extends MongoRepository<VerificationToken, Long> {
+public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
 
     VerificationToken findById(String id);
 

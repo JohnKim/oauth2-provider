@@ -1,10 +1,11 @@
 package com.porterhead.oauth2.mongodb;
 
-import com.porterhead.oauth2.OAuth2AuthenticationAccessToken;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.porterhead.oauth2.OAuth2AuthenticationAccessToken;
 
 /**
  * @version 1.0
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 22/05/2013
  */
 @Repository
-public interface OAuth2AccessTokenRepository extends MongoRepository<OAuth2AuthenticationAccessToken, String> {
+public interface OAuth2AccessTokenRepository extends JpaRepository<OAuth2AuthenticationAccessToken, String> {
 
     public OAuth2AuthenticationAccessToken findByTokenId(String tokenId);
 

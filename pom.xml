@@ -13,6 +13,14 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+  
+  	<properties>
+		<spring.version>3.2.10.RELEASE</spring.version>
+		<spring.data.jpa.version>1.6.5.RELEASE</spring.data.jpa.version>
+		<hibernate.version>4.3.5.Final</hibernate.version>
+		<jdk.version>1.6</jdk.version>
+	</properties>
+	
   <dependencies>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -274,12 +282,30 @@
       <version>1.9.0</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-mongodb</artifactId>
-      <version>1.5.1.RELEASE</version>
-      <scope>compile</scope>
-    </dependency>
+
+		<!-- Hibernate and JPA -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>javax.servlet</artifactId>

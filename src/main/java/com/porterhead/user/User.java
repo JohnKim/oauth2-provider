@@ -1,21 +1,27 @@
 package com.porterhead.user;
 
-import com.porterhead.persistence.BaseEntity;
-import com.porterhead.user.api.ApiUser;
-import com.mongodb.DBObject;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.Entity;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import com.porterhead.persistence.BaseEntity;
+import com.porterhead.user.api.ApiUser;
 
 /**
  * @version 1.0
  * @author: Iain Porter
  * @since 24/04/2013
  */
-@Document(collection = "app_user")
+@Entity
 public class User extends BaseEntity implements UserDetails {
 
     private String emailAddress;
@@ -42,17 +48,6 @@ public class User extends BaseEntity implements UserDetails {
         this.lastName = apiUser.getLastName();
         this.age = apiUser.getAge();
         this.roles.add(role);
-    }
-
-    public User(DBObject dbObject) {
-        this((String)dbObject.get("_id"));
-        this.emailAddress = (String)dbObject.get("emailAddress");
-        this.firstName = (String)dbObject.get("firstName");
-        this.lastName = (String)dbObject.get("lastName");
-        this.hashedPassword = (String)dbObject.get("hashedPassword");
-        this.verified = (Boolean)dbObject.get("verified");
-        List<String> roles = (List<String>)dbObject.get("roles");
-        deSerializeRoles(roles);
     }
 
     private void deSerializeRoles(List<String> roles) {
