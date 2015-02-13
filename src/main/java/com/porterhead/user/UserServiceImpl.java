@@ -76,7 +76,7 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
     @Transactional
     public ApiUser saveUser(String userId, UpdateUserRequest request) {
         validate(request);
-        User user = userRepository.findById(userId);
+        User user = userRepository.findOne(userId);
         if(user == null) {
             throw new UserNotFoundException();
         }
@@ -99,7 +99,7 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
     @Override
     public ApiUser getUser(String userId) {
         Assert.notNull(userId);
-        User user = userRepository.findById(userId);
+        User user = userRepository.findOne(userId);
         if(user == null) {
             throw new UserNotFoundException();
         }

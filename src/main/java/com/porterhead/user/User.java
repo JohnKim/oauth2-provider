@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,12 +26,17 @@ import com.porterhead.user.api.ApiUser;
 @Entity
 public class User extends BaseEntity implements UserDetails {
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
     private String emailAddress;
     private String firstName;
     private String lastName;
     private Integer age;
     private String hashedPassword;
     private Boolean verified = false;
+    
+    @Embedded
     private List<Role> roles = new ArrayList<Role>();
 
     public User() {

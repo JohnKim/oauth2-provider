@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 import org.joda.time.DateTime;
 
@@ -21,12 +24,16 @@ import com.porterhead.persistence.BaseEntity;
 @Entity
 public class VerificationToken extends BaseEntity {
 
-    private static final int DEFAULT_EXPIRY_TIME_IN_MINS = 60 * 24; //24 hours
+	private static final long serialVersionUID = 1L;
 
+	private static final int DEFAULT_EXPIRY_TIME_IN_MINS = 60 * 24; //24 hours
+
+    @Id
     private final String token;
 
     private Date expiryDate;
 
+    @Enumerated(EnumType.STRING)
     private VerificationTokenType tokenType;
 
     private boolean verified;

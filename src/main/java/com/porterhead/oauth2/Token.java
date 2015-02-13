@@ -3,6 +3,7 @@ package com.porterhead.oauth2;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -21,11 +22,13 @@ public class Token extends BaseEntity {
 	
 	@Id
     private String tokenId;
+	@Lob
 	@Embedded
     private OAuth2AccessToken oAuth2AccessToken;
     private String authenticationId;
     private String userName;
     private String clientId;
+    @Lob
     @Embedded
     private OAuth2Authentication authentication;
     private String refreshToken;

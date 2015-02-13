@@ -1,18 +1,34 @@
 package com.porterhead.oauth2;
 
-import com.porterhead.persistence.BaseEntity;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+
+import com.porterhead.persistence.BaseEntity;
 
 /**
  * @version 1.0
  * @author: Iain Porter
  * @since 23/05/2013
  */
+
+@Entity
 public class OAuth2AuthenticationRefreshToken extends BaseEntity {
 
-    private String tokenId;
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	private String tokenId;
+	
+	@Lob
+	@Embedded
     private OAuth2RefreshToken oAuth2RefreshToken;
+    @Lob
+    @Embedded
     private OAuth2Authentication authentication;
 
     public OAuth2AuthenticationRefreshToken(OAuth2RefreshToken oAuth2RefreshToken, OAuth2Authentication authentication) {
