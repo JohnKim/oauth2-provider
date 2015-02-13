@@ -26,8 +26,8 @@ public class JPAConfiguration {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean
-				.setPackagesToScan(new String[] { "com.dictionary.backend.model" });
+		factoryBean.setPackagesToScan(new String[] { "com.porterhead.oauth2",
+				"com.porterhead.user" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		factoryBean.setJpaVendorAdapter(vendorAdapter);
@@ -60,7 +60,7 @@ public class JPAConfiguration {
 	private Properties additionalProperties() {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-		properties.setProperty("hibernate.show_sql", "false");
+		properties.setProperty("hibernate.show_sql", "true");
 		properties.setProperty("hibernate.format_sql", "true");
 		properties.setProperty("hibernate.dialect",
 				"org.hibernate.dialect.HSQLDialect");

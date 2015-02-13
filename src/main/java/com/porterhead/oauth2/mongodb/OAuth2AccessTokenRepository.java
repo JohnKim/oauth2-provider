@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.porterhead.oauth2.OAuth2AuthenticationAccessToken;
+import com.porterhead.oauth2.Token;
 
 /**
  * @version 1.0
@@ -13,15 +13,15 @@ import com.porterhead.oauth2.OAuth2AuthenticationAccessToken;
  * @since 22/05/2013
  */
 @Repository
-public interface OAuth2AccessTokenRepository extends JpaRepository<OAuth2AuthenticationAccessToken, String> {
+public interface OAuth2AccessTokenRepository extends JpaRepository<Token, String> {
 
-    public OAuth2AuthenticationAccessToken findByTokenId(String tokenId);
+    public Token findByTokenId(String tokenId);
 
-    public OAuth2AuthenticationAccessToken findByRefreshToken(String refreshToken);
+    public Token findByRefreshToken(String refreshToken);
 
-    public OAuth2AuthenticationAccessToken findByAuthenticationId(String authenticationId);
+    public Token findByAuthenticationId(String authenticationId);
 
-    public List<OAuth2AuthenticationAccessToken> findByClientIdAndUserName(String clientId, String userName);
+    public List<Token> findByClientIdAndUserName(String clientId, String userName);
 
-    public List<OAuth2AuthenticationAccessToken> findByClientId(String clientId);
+    public List<Token> findByClientId(String clientId);
 }

@@ -1,11 +1,13 @@
 package com.porterhead.oauth2;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-
-import com.porterhead.persistence.BaseEntity;
+import javax.persistence.Id;
 
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+
+import com.porterhead.persistence.BaseEntity;
 
 /**
  * @version 1.0
@@ -13,20 +15,25 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
  * @since 22/05/2013
  */
 @Entity
-public class OAuth2AuthenticationAccessToken extends BaseEntity {
+public class Token extends BaseEntity {
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
     private String tokenId;
+	@Embedded
     private OAuth2AccessToken oAuth2AccessToken;
     private String authenticationId;
     private String userName;
     private String clientId;
+    @Embedded
     private OAuth2Authentication authentication;
     private String refreshToken;
 
-    public OAuth2AuthenticationAccessToken() {
+    public Token() {
     }
 
-    public OAuth2AuthenticationAccessToken(final OAuth2AccessToken oAuth2AccessToken, final OAuth2Authentication authentication, final String authenticationId) {
+    public Token(final OAuth2AccessToken oAuth2AccessToken, final OAuth2Authentication authentication, final String authenticationId) {
         this.tokenId = oAuth2AccessToken.getValue();
         this.oAuth2AccessToken = oAuth2AccessToken;
         this.authenticationId = authenticationId;

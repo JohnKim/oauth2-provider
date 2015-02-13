@@ -1,6 +1,6 @@
 package com.porterhead.oauth2.mongodb;
 
-import com.porterhead.oauth2.OAuth2AuthenticationAccessToken;
+import com.porterhead.oauth2.Token;
 import com.porterhead.oauth2.OAuth2AuthenticationRefreshToken;
 import com.porterhead.oauth2.mongodb.OAuth2AccessTokenRepository;
 import com.porterhead.oauth2.mongodb.OAuth2RefreshTokenRepository;
@@ -48,14 +48,14 @@ public class OAuth2RepositoryTokenStore implements TokenStore {
 
     @Override
     public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
-        OAuth2AuthenticationAccessToken oAuth2AuthenticationAccessToken = new OAuth2AuthenticationAccessToken(token,
+        Token oAuth2AuthenticationAccessToken = new Token(token,
                 authentication, authenticationKeyGenerator.extractKey(authentication));
         oAuth2AccessTokenRepository.save(oAuth2AuthenticationAccessToken);
     }
 
     @Override
     public OAuth2AccessToken readAccessToken(String tokenValue) {
-        OAuth2AuthenticationAccessToken token = oAuth2AccessTokenRepository.findByTokenId(tokenValue);
+        Token token = oAuth2AccessTokenRepository.findByTokenId(tokenValue);
         if(token == null) {
             return null; //let spring security handle the invalid token
         }
@@ -65,7 +65,7 @@ public class OAuth2RepositoryTokenStore implements TokenStore {
 
     @Override
     public void removeAccessToken(OAuth2AccessToken token) {
-        OAuth2AuthenticationAccessToken accessToken = oAuth2AccessTokenRepository.findByTokenId(token.getValue());
+        Token accessToken = oAuth2AccessTokenRepository.findByTokenId(token.getValue());
         if(accessToken != null) {
             oAuth2AccessTokenRepository.delete(accessToken);
         }
@@ -98,25 +98,25 @@ public class OAuth2RepositoryTokenStore implements TokenStore {
 
     @Override
     public OAuth2AccessToken getAccessToken(OAuth2Authentication authentication) {
-        OAuth2AuthenticationAccessToken token =  oAuth2AccessTokenRepository.findByAuthenticationId(authenticationKeyGenerator.extractKey(authentication));
+        Token token =  oAuth2AccessTokenRepository.findByAuthenticationId(authenticationKeyGenerator.extractKey(authentication));
         return token == null ? null : token.getoAuth2AccessToken();
     }
 
     @Override
     public Collection<OAuth2AccessToken> findTokensByClientId(String clientId) {
-        List<OAuth2AuthenticationAccessToken> tokens = oAuth2AccessTokenRepository.findByClientId(clientId);
+        List<Token> tokens = oAuth2AccessTokenRepository.findByClientId(clientId);
         return extractAccessTokens(tokens);
     }
 
     @Override
     public Collection<OAuth2AccessToken> findTokensByClientIdAndUserName(String clientId, String userName) {
-        List<OAuth2AuthenticationAccessToken> tokens = oAuth2AccessTokenRepository.findByClientIdAndUserName(clientId, userName);
+        List<Token> tokens = oAuth2AccessTokenRepository.findByClientIdAndUserName(clientId, userName);
         return extractAccessTokens(tokens);
     }
 
-    private Collection<OAuth2AccessToken> extractAccessTokens(List<OAuth2AuthenticationAccessToken> tokens) {
+    private Collection<OAuth2AccessToken> extractAccessTokens(List<Token> tokens) {
         List<OAuth2AccessToken> accessTokens = new ArrayList<OAuth2AccessToken>();
-        for(OAuth2AuthenticationAccessToken token : tokens) {
+        for(Token token : tokens) {
             accessTokens.add(token.getoAuth2AccessToken());
         }
         return accessTokens;

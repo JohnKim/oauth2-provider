@@ -5,6 +5,7 @@
   <groupId>com.porterhead.oauth2.provider</groupId>
   <artifactId>oauth2-provider</artifactId>
   <version>1.0.SNAPSHOT</version>
+  <packaging>war</packaging>
   <inceptionYear>2015</inceptionYear>
   <licenses>
     <license>
